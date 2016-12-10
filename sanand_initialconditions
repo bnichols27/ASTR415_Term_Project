@@ -1,0 +1,45 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+#include "nrutil.h"
+#include "nr.h"
+#define k 50
+#define sq(x) x*x
+double randR(double min, double max) {
+        return min + (double) (rand()/ (double)(RAND_MAX)*(max-min));
+        }
+int main() {
+
+        double m,u,v,x,y,z,p_r,p;
+        double R,A,vx,vy,vz;
+        double a,b;
+        int i,N,n,counter,counter2;
+        double r,r_eqn;
+        char xy[20];
+        N=500;
+        m=1.0;
+        R=1.0;
+        A=M_PI*R*R;
+        counter=0;
+        counter2=0;
+        sprintf(xy,"xy.dat");
+        FILE * xy_f=fopen(xy,"w+");
+        while(counter<=500) {
+                u=randR(-1*k,1*k);
+                v=randR(-1*k,1*k);
+                x=sqrt(-2*log(u))-1;
+                y=sqrt(-2*log(v))-1;
+                z=0.4*x;
+                r=sqrt(sq(x)+sq(y));
+                p_r=exp(-r);
+                r_eqn=sq(x)+sq(y);
+                vx=0;
+                vy=sqrt(p_r*A/r);
+                vz=0;
+                if (r_eqn<=1.0){
+                        fprintf(xy_f,"%f %f %f %f %f %f %f\n",x,y,z,vx,vy,vz,r);
+                        counter+=1;
+                        }
+                }
+       }
