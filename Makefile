@@ -1,8 +1,13 @@
-all:  Nbody Nbody_e9 
+all: init galaxy kevans
 
-Nbody:
-	gcc -o Nbody Nbody.c leapfrog.c rk4.c euler.c nrutil.c -O0 -lm
-Nbody_e9:
-	gcc -o Nbody_e9 Nbody_e9.c leapfrog.c rk4.c  nrutil.c -O0 -lm
+init:
+	gcc -o init Initialconditions.c nrutil.c -O0 -lm
+
+kevans:
+	gcc -o kevans IC_Kevans.c nrutil.c -O0 -lm
+
+galaxy:
+	gcc -o galaxy Nbody_galaxy.c nrutil.c leapfrog.c rk4.c -O0 -lm
+
 clean:
-	rm -f Nbody Nbody_e9 *.o
+	rm -f init kevans galaxy *.o
